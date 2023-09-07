@@ -1,10 +1,11 @@
 # Logics
 import click
+import random
 from db import User, Subject, session
 
 @click.command()
 def register_user():
-    username = input("Enter your name: ")
+    username = click.prompt("Enter your name: ")
     user = User(username=username)
     session.add(user)
     session.commit()
@@ -15,9 +16,35 @@ def list_subjects():
     subjects = session.query(Subject).all()
     if subjects:
         for subject in subjects:
-            print(subject.name)
+            click.echo(subject.name)
     else:
-        print("No subjects found in the database.")
+        click.echo("No subjects found in the database.")
+
+questions = [
+       {"question": "What is the capital of France?", "answer": "Paris"},
+       {"question": "Who painted the Mona Lisa?", "answer": "Leonardo da Vinci"},
+       {"question": "What is the largest planet in our solar system?", "answer": "Jupiter"}
+]
+
+@click.command()
+def quiz():
+    question = random.choice(questions)
+    user_answer = click.prompt(question["question"])
+
+    if user_answer.lower() == question["answer"].lower():
+        click.echo("You are correct!")
+    else:
+        click.echo("You are wrong!")
+
+@click.command
+def show_history():
+    history = click.get_current_context().meta.get("history", [])
+    if history:
+        click.echo("Command History:")
+        for command in history:
+            click.echo(command)
+    else:
+        click.echo("No command history found.")
 
 @click.group()
 def cli():
@@ -25,6 +52,8 @@ def cli():
 
 cli.add_command(register_user)
 cli.add_command(list_subjects)
+cli.add_command(quiz)
+cli.add_command(show_history)
 
 if __name__ == '__main__':
     cli()
