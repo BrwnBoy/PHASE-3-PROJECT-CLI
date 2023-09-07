@@ -1,26 +1,30 @@
 # Logics
 import click
-from db import Base, engine, User, Subject
-from sqlalchemy.orm import sessionmaker
-
-Session = sessionmaker(bind=engine)
-session = Session()
+from db import User, Subject, session
 
 @click.command()
-@click.option('--username', prompt='PLease enter your username')
-def register(username):
-    # Checking if the user already exists
-    user = session.query(User).filter_by(username=username).first()
-    if user:
-        click.echo(f'Username {username} is already taken. Please choose a different username.')
+def register_user():
+    username = input("Enter your name: ")
+    user = User(username=username)
+    session.add(user)
+    session.commit()
+    print("You've registered successfuly!")
+
+@click.command()
+def list_subjects():
+    subjects = session.query(Subject).all()
+    if subjects:
+        for subject in subjects:
+            print(subject.name)
     else:
-        # Creating a new user and adding them to the database
-        new_user = User(username=username)
-        session.add(new_user)
-        session.commit()
-        click.echo(f'User {username} registered successfully!')
+        print("No subjects found in the database.")
+
+@click.group()
+def cli():
+    pass
+
+cli.add_command(register_user)
+cli.add_command(list_subjects)
 
 if __name__ == '__main__':
-    Base.metadata.create_all(engine)
-    register()
-    select_subject()
+    cli()
