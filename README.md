@@ -17,7 +17,7 @@ Authour:**Brian Mwangi Maina**
 <li>Finally, open up VS.Code by typing in (code .) in your terminal while in the repository.
 
 ### What Goes Into Making The Program Run:
-(1)**Install Of Dependencies**:
+(1)**Installing Of Dependencies**:
 Make sure you have the click library installed. You can install it using pipenv:
 (*pipenv install click*)
 
@@ -25,11 +25,11 @@ Make sure you have the click library installed. You can install it using pipenv:
 The code assumes that you have a database and a User and Subject table defined in a file called db.py. Make sure you have the db.py file with the necessary table definitions.
 Ensure that the database connection details are correctly configured in the db.py file. This includes the database URL, credentials, and any other required configuration.
 
-(3)**Run the Code**:
+(3)**Running the Code**:
 Once you have the dependencies installed and the database configured, you can run the code by executing the education_app.py file using Python:
 (*python3 education_app.py*)
 
-(4)**Interact with the CLI**:
+(4)**Interacting with the CLI**:
 After running the code, you can interact with the CLI by entering commands in the terminal.
 Available commands:
 *register_user*: Prompts for a username and adds a new user to the database.
