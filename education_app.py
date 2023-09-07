@@ -3,12 +3,15 @@ import click
 import random
 from db import User, Subject, session
 
+command_history = []
+
 @click.command()
 def register_user():
-    username = click.prompt("Enter your name: ")
+    username = click.prompt("Enter your name")
     user = User(username=username)
     session.add(user)
     session.commit()
+    command_history.append("register_user")
     print("You've registered successfuly!")
 
 @click.command()
@@ -19,10 +22,11 @@ def list_subjects():
             click.echo(subject.name)
     else:
         click.echo("No subjects found in the database.")
+    command_history.append("list_subjects")
 
 questions = [
        {"question": "What is the capital of France?", "answer": "Paris"},
-       {"question": "Who painted the Mona Lisa?", "answer": "Leonardo da Vinci"},
+       {"question": "Who painted the Mona Lisa?", "answer": "Leonardo Da Vinci"},
        {"question": "What is the largest planet in our solar system?", "answer": "Jupiter"}
 ]
 
@@ -38,10 +42,10 @@ def quiz():
 
 @click.command
 def show_history():
-    history = click.get_current_context().meta.get("history", [])
-    if history:
+    unique_commands = list(set(command_history))
+    if unique_commands:
         click.echo("Command History:")
-        for command in history:
+        for command in unique_commands:
             click.echo(command)
     else:
         click.echo("No command history found.")
