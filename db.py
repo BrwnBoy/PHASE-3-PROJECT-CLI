@@ -31,7 +31,6 @@ class User(Base):
     
     id = Column(Integer, primary_key=True)
     username = Column(String(100))
-    subject_id = Column(Integer, ForeignKey('subjects.id'))
     
     # Relationship Field
     subjects = relationship('Subject', back_populates='users')
@@ -42,7 +41,7 @@ Base.metadata.create_all(engine)
 # Inserting subjects into the 'subjects' table
 subjects = ['Mathematics', 'Languages', 'Science', 'History', 'Geography', 'Music/Arts']
 for name in subjects:
-# Checking if subject already exists
+    # Checking if subject already exists
     subject = session.query(Subject).filter_by(name=name).first()
     
     if subject:

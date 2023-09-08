@@ -37,6 +37,7 @@ Available commands:
 *quiz*: Asks a random question from the questions list and checks if the user's answer is correct or wrong.
 *show_history*: Displays the unique command history.
 You can enter the command names in the terminal to execute the corresponding functionality.
+*add_subject*: Adds a new subject to the database. It prompts the user to enter the name of the new subject, creates a Subject object with the provided name, merges it into the session, and commits the changes to the database. After successful addition, it prints a confirmation message.
 
 **Please ensure that you have the necessary dependencies, a properly configured database, and run the code using Python to interact with the CLI.**
 
