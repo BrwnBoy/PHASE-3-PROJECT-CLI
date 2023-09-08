@@ -18,7 +18,7 @@ Authour:**Brian Mwangi Maina**
 
 ### What Goes Into Making The Program Run:
 (1)**Installing Of Dependencies**:
-Make sure you have the click library installed. You can install it using pipenv:
+Make sure you have the dependecy library installed. You can install it using pipenv/pip:
 (*pipenv install click*)
 
 (2)**Database Configuration**:
