@@ -1,7 +1,7 @@
 # Logics
 import click
 import random
-from db import User, Subject, session
+from db import User, Subject, session, Base, engine
 
 command_history = []
 
@@ -40,7 +40,7 @@ def quiz():
     else:
         click.echo("You are wrong!")
 
-@click.command
+@click.command()
 def show_history():
     unique_commands = list(set(command_history))
     if unique_commands:
